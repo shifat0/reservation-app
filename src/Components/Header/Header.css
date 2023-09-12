@@ -1,0 +1,141 @@
+.header {
+  background-color: #053b50;
+  color: white;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.headerContainer {
+  width: 1200px;
+  max-width: 100%;
+  margin: 20px 0 100px 0;
+}
+
+.headerList {
+  display: flex;
+  gap: 40px;
+}
+
+.headerItem {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.headerItem.active {
+  border: white 1px solid;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.headerSubtitle {
+  margin: 20px 0;
+}
+
+.headerButton {
+  background-color: #176b87;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.headerSearch {
+  height: 30px;
+  background-color: white;
+  border: #64ccc5 3px solid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  position: absolute;
+  bottom: -25px; /* height+padding = 50px; middle = 25px */
+  width: 1200px;
+}
+
+.headerSearchIcon {
+  color: lightgray;
+}
+
+.headerSearchBtn {
+  background-color: #176b87;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.headerSearchItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerSearchInput {
+  border: none;
+  outline: none;
+  color: #053b50;
+  opacity: 70%;
+}
+
+.headerSearchInput::placeholder {
+  color: #053b50;
+}
+
+.headerSearchText {
+  width: 250px;
+  color: #053b50;
+  cursor: pointer;
+  opacity: 70%;
+}
+
+.calander {
+  position: absolute;
+  top: 50px;
+}
+
+.options {
+  color: black;
+  background-color: #176b87;
+  color: white;
+  width: 200px;
+  padding: 20px;
+  position: absolute;
+  top: 50px;
+  box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.55);
+}
+
+.optionItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.optionCounter {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.optionCounterNumber {
+  width: 5px;
+}
+
+.optionBtn {
+  height: 30px;
+  width: 30px;
+  background-color: #64ccc5;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: large;
+}
+
+.optionBtn:disabled {
+  cursor: not-allowed;
+}
