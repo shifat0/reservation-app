@@ -1,0 +1,22 @@
+.propertyContainer {
+  width: 1200px;
+  margin-top: 30px;
+}
+
+.property {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.propertyItem {
+  flex: 1;
+  overflow: hidden;
+}
+
+.propertyImg {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
