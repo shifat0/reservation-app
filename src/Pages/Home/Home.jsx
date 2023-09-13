@@ -6,6 +6,7 @@ import "./Home.css";
 import PropertyList from "../../Components/PropertyList/PropertyList";
 import FeaturedProperty from "../../Components/FeaturedProperty/FeaturedProperty";
 import SubscribeMail from "../../Components/SubscribeMail/SubscribeMail";
+import Footer from "../../Components/Footer/Footer";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
         <PropertyList />
         <FeaturedProperty />
         <SubscribeMail />
+        <Footer />
       </div>
     </>
   );
