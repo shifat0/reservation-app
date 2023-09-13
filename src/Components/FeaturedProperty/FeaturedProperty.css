@@ -26,11 +26,11 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  color: gray;
 }
 
-.fpCardDetails > p,
-span {
-  color: gray;
+.fpCardDetails > h2 {
+  color: black;
 }
 
 .fpRating {
