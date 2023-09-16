@@ -5,6 +5,48 @@
   margin-top: 20px;
 }
 
+.slider {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.231);
+  z-index: 99;
+  display: flex;
+  align-items: center;
+}
+
+.sliderWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sliderImg {
+  height: 80vh;
+  width: 80%;
+  object-fit: cover;
+}
+
+.sliderClose {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  color: #c70039;
+  cursor: pointer;
+}
+
+.sliderArrow {
+  margin: 30px;
+  font-size: 50px;
+  color: #176b87;
+  cursor: pointer;
+}
+
 .hotelWrapper {
   width: 1200px;
   display: flex;
@@ -50,6 +92,7 @@
   height: 300px;
   object-fit: cover;
   margin-bottom: 2px;
+  cursor: pointer;
 }
 
 .hotelDetails {
@@ -63,6 +106,7 @@
   flex: 3;
   font-size: 16px;
   text-align: justify;
+  line-height: 25px;
 }
 
 .hotelDetailsPrice {

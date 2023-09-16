@@ -1,17 +1,63 @@
+import { useState } from "react";
 import "./Hotel.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleArrowLeft,
+  faCircleArrowRight,
+  faCircleXmark,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
 import { images } from "../../Assets/Images";
 
 const Hotel = () => {
+  const [openSlider, setOpenSLider] = useState(false);
+  const [slider, setSlider] = useState(0);
+
+  const handleSlider = (i) => {
+    setOpenSLider(true);
+    setSlider(i);
+  };
+
+  const handleArrow = (direction) => {
+    let slidenumber;
+    if (direction === "left") {
+      slidenumber = slider === 0 ? 5 : slider - 1;
+    } else {
+      slidenumber = slider === 5 ? 0 : slider + 1;
+    }
+    setSlider(slidenumber);
+  };
+
   return (
     <>
       <Navbar />
       <Header type="hotelList" />
       <div className="hotelContainer">
+        {openSlider && (
+          <div className="slider">
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              className="sliderClose"
+              onClick={() => setOpenSLider(false)}
+            />
+            <FontAwesomeIcon
+              icon={faCircleArrowLeft}
+              className="sliderArrow"
+              onClick={() => handleArrow("left")}
+            />
+            <div className="sliderWrapper">
+              <img src={images[slider].src} alt="" className="sliderImg" />
+            </div>
+            <FontAwesomeIcon
+              icon={faCircleArrowRight}
+              className="sliderArrow"
+              onClick={() => handleArrow("right")}
+            />
+          </div>
+        )}
         <div className="hotelWrapper">
           <h1 style={{ fontSize: "26px" }}>Grand Hotel</h1>
           <button className="hotelBookNow">Reserve or Book now</button>
@@ -27,10 +73,14 @@ const Hotel = () => {
             taxi
           </span>
           <div className="hotelImages">
-            {images.map((image) => {
+            {images.map((image, idx) => {
               return (
                 <div className="hotelImgWrapper" key={image.id}>
-                  <img src={image.src} alt="" />
+                  <img
+                    src={image.src}
+                    alt=""
+                    onClick={() => handleSlider(idx)}
+                  />
                 </div>
               );
             })}
