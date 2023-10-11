@@ -1,41 +1,35 @@
 import "./PropertyList.css";
-import villa from "../../Assets/villa.jfif";
-import hotel from "../../Assets/hotel.jfif";
+import { propertyImages } from "../../Assets/propertyImages";
+import useFetch from "../../hooks/useFetch";
 
 const PropertyList = () => {
+  const { data, loading } = useFetch(
+    `${process.env.REACT_APP_PROXY_URL}/hotels/count-by-type`
+  );
+  console.log(data);
   return (
     <div className="propertyContainer">
       <h3 style={{ marginBottom: "15px" }}>Browse By Property Type</h3>
-      <div className="property">
-        <div className="propertyItem">
-          <img src={hotel} alt="" className="propertyImg" />
-          <div className="propertyTitles">
-            <h4>Hotels</h4>
-            <span>hotels</span>
-          </div>
+      {loading ? (
+        "Loading..."
+      ) : (
+        <div className="property">
+          {data &&
+            propertyImages.map((img, i) => (
+              <div className="propertyItem" key={i}>
+                <img src={img.src} alt="" className="propertyImg" />
+                <div className="propertyTitles">
+                  <h4 style={{ textTransform: "capitalize", fontSize: "18px" }}>
+                    {data[i]?.type}
+                  </h4>
+                  <span style={{ color: "gray" }}>
+                    {data[i]?.count} {data[i]?.type}s
+                  </span>
+                </div>
+              </div>
+            ))}
         </div>
-        <div className="propertyItem">
-          <img src={hotel} alt="" className="propertyImg" />
-          <div className="propertyTitles">
-            <h4>Apartments</h4>
-            <span>Apartments</span>
-          </div>
-        </div>
-        <div className="propertyItem">
-          <img src={hotel} alt="" className="propertyImg" />
-          <div className="propertyTitles">
-            <h4>Resorts</h4>
-            <span>resorts</span>
-          </div>
-        </div>
-        <div className="propertyItem">
-          <img src={villa} alt="Villa" className="propertyImg" />
-          <div className="propertyTitles">
-            <h4>Villas</h4>
-            <span>villas</span>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
