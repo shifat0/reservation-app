@@ -27,6 +27,7 @@
   flex-direction: column;
   gap: 5px;
   color: gray;
+  text-transform: capitalize;
 }
 
 .fpCardDetails > h2 {

@@ -6,7 +6,7 @@ const PropertyList = () => {
   const { data, loading } = useFetch(
     `${process.env.REACT_APP_PROXY_URL}/hotels/count-by-type`
   );
-  console.log(data);
+  // console.log(data);
   return (
     <div className="propertyContainer">
       <h3 style={{ marginBottom: "15px" }}>Browse By Property Type</h3>
