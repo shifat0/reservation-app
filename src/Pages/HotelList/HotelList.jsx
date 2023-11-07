@@ -12,7 +12,7 @@ const HotelList = () => {
   const location = useLocation();
   // receiveing states passed from Header Component
   const [destination, setDestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
+  const [dates, setDates] = useState(location.state.dates);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
   const [min, setMin] = useState(0);
@@ -24,6 +24,12 @@ const HotelList = () => {
 
   const handleSearch = () => {
     reFetch();
+  };
+  console.log(options);
+  const handleOptions = (e, name) => {
+    setOptions((prev) => {
+      return { ...prev, [name]: +e.target.value };
+    });
   };
 
   return (
@@ -49,16 +55,16 @@ const HotelList = () => {
                 name=""
                 onClick={() => setOpenDate(!openDate)}
                 placeholder={`${format(
-                  date[0].startDate,
+                  dates[0].startDate,
                   "dd/MM/yyyy"
-                )} to ${format(date[0].endDate, "dd/MM/yyyy")}`}
+                )} to ${format(dates[0].endDate, "dd/MM/yyyy")}`}
               />
               {openDate && (
                 <DateRange
                   editableDateInputs={true}
-                  onChange={(item) => setDate([item.selection])}
+                  onChange={(item) => setDates([item.selection])}
                   moveRangeOnFirstSelection={false}
-                  ranges={date}
+                  ranges={dates}
                   minDate={new Date()}
                 />
               )}
@@ -92,7 +98,7 @@ const HotelList = () => {
                   <span className="hlsOptionText">Adult</span>
                   <input
                     type="number"
-                    name=""
+                    onChange={(e) => handleOptions(e, "adult")}
                     placeholder={options.adult}
                     min={1}
                   />
@@ -101,7 +107,7 @@ const HotelList = () => {
                   <span className="hlsOptionText">Children</span>
                   <input
                     type="number"
-                    name=""
+                    onChange={(e) => handleOptions(e, "children")}
                     placeholder={options.children}
                     min={0}
                   />
@@ -110,7 +116,7 @@ const HotelList = () => {
                   <span className="hlsOptionText">Room</span>
                   <input
                     type="number"
-                    name=""
+                    onChange={(e) => handleOptions(e, "room")}
                     placeholder={options.room}
                     min={1}
                   />

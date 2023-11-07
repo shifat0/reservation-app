@@ -34,7 +34,9 @@ const SearchItem = ({ hotels, loading }) => {
                   </div>
                 )}
                 <div className="siDetailsTag">
-                  <span className="siDetailsTagPrice">BDT 19,784</span>
+                  <span className="siDetailsTagPrice">
+                    BDT {hotel.cheapestPrice}
+                  </span>
                   <span className="siDetailsTagFee">
                     Includes taxes and fees
                   </span>

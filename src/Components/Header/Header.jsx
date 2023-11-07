@@ -9,13 +9,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./Header.css";
 import { DateRange } from "react-date-range";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../Context/SearchContext";
 
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
-  const [date, setDate] = useState([
+  const [dates, setDates] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -25,15 +26,17 @@ const Header = ({ type }) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [options, setOptions] = useState({
-    adult: 0,
+    adult: 1,
     children: 0,
-    room: 0,
+    room: 1,
   });
 
   const navigate = useNavigate();
+  const { dispatch } = useContext(SearchContext);
   const handleSearch = () => {
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     navigate("/hotels", {
-      state: { destination, date, options },
+      state: { destination, dates, options },
     });
   };
 
@@ -104,15 +107,15 @@ const Header = ({ type }) => {
                   className="headerSearchText"
                   onClick={() => setShowCalendar(!showCalendar)}
                 >
-                  {format(date[0].startDate, "dd/MM/yyyy")} to{" "}
-                  {format(date[0].endDate, "dd/MM/yyyy")}
+                  {format(dates[0].startDate, "dd/MM/yyyy")} to{" "}
+                  {format(dates[0].endDate, "dd/MM/yyyy")}
                 </span>
                 {showCalendar && (
                   <DateRange
                     editableDateInputs={true}
-                    onChange={(item) => setDate([item.selection])}
+                    onChange={(item) => setDates([item.selection])}
                     moveRangeOnFirstSelection={false}
-                    ranges={date}
+                    ranges={dates}
                     minDate={new Date()}
                     className="calander"
                   />

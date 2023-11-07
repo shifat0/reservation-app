@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./Hotel.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import Header from "../../Components/Header/Header";
@@ -13,6 +13,7 @@ import {
 import { images } from "../../Assets/Images";
 import useFetch from "../../hooks/useFetch";
 import { useParams } from "react-router-dom";
+import { SearchContext } from "../../Context/SearchContext";
 
 const Hotel = () => {
   const [openSlider, setOpenSLider] = useState(false);
@@ -21,6 +22,15 @@ const Hotel = () => {
   const { data, loading } = useFetch(
     `${process.env.REACT_APP_PROXY_URL}/hotels/single/${id}`
   );
+
+  const { dates, options } = useContext(SearchContext);
+
+  const dayDifference = (date1, date2) => {
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // miliseconds per day
+    return diffDays;
+  };
+  const days = dayDifference(dates[0].endDate, dates[0].startDate);
 
   const handleSlider = (i) => {
     setOpenSLider(true);
@@ -97,14 +107,15 @@ const Hotel = () => {
             </div>
             <div className="hotelDetailsPrice">
               <h3 style={{ color: "#555", fontSize: "18px" }}>
-                Perfect for a 9-night stay
+                Perfect for a {days}-night stay
               </h3>
               <span style={{ fontSize: "14px", textAlign: "justify" }}>
                 Located in the real heart of Cox's Bazar. This property has an
                 excellent location score of 9.8
               </span>
               <span style={{ fontWeight: "600" }}>
-                <bold>BDT 18,978</bold> (9 nights)
+                <bold>BDT {days * options.room * data.cheapestPrice}</bold> (
+                {days} nights)
               </span>
               <button>Reserve for a book now</button>
             </div>
