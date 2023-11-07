@@ -11,10 +11,16 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { images } from "../../Assets/Images";
+import useFetch from "../../hooks/useFetch";
+import { useParams } from "react-router-dom";
 
 const Hotel = () => {
   const [openSlider, setOpenSLider] = useState(false);
   const [slider, setSlider] = useState(0);
+  const { id } = useParams();
+  const { data, loading } = useFetch(
+    `${process.env.REACT_APP_PROXY_URL}/hotels/single/${id}`
+  );
 
   const handleSlider = (i) => {
     setOpenSLider(true);
@@ -59,18 +65,18 @@ const Hotel = () => {
           </div>
         )}
         <div className="hotelWrapper">
-          <h1 style={{ fontSize: "26px" }}>Grand Hotel</h1>
+          <h1 style={{ fontSize: "26px" }}>{data.name}</h1>
           <button className="hotelBookNow">Reserve or Book now</button>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span>Cox's Bazar Sughondha Point</span>
+            <span>{data.address}</span>
           </div>
           <span style={{ color: "#088395", fontWeight: "500" }}>
-            Excellent location - 500m from center
+            Excellent location - {data.distance} from center
           </span>
           <span style={{ color: "#1a5d1a", fontWeight: "500" }}>
-            Book a stay over BDT 19,786 at this property and get a free airport
-            taxi
+            Book a stay over BDT {data.cheapestPrice} on this property and get a
+            free airport taxi
           </span>
           <div className="hotelImages">
             {images.map((image, idx) => {
@@ -87,17 +93,7 @@ const Hotel = () => {
           </div>
           <div className="hotelDetails">
             <div className="hotelDetailsText">
-              <p>
-                Located in Cox's Bazar, Saint Martin Resort offers a terrace.
-                Among the facilities of this property are a restaurant, room
-                service and a 24-hour front desk, along with free WiFi
-                throughout the property. The hotel features family rooms. At the
-                hotel, each room is equipped with a desk, a flat-screen TV, a
-                private bathroom, bed linen and towels. Guests at Saint Martin
-                Resort can enjoy an à la carte breakfast. The nearest airport is
-                Cox's Bazar Airport, 5 km from the accommodation. Distance in
-                property description is calculated using © OpenStreetMap
-              </p>
+              <p>{data.desc}</p>
             </div>
             <div className="hotelDetailsPrice">
               <h3 style={{ color: "#555", fontSize: "18px" }}>
