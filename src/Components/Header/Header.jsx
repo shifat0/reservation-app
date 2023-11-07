@@ -13,6 +13,7 @@ import { useContext, useState } from "react";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../Context/SearchContext";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
@@ -33,6 +34,8 @@ const Header = ({ type }) => {
 
   const navigate = useNavigate();
   const { dispatch } = useContext(SearchContext);
+  const { user } = useContext(AuthContext);
+
   const handleSearch = () => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     navigate("/hotels", {
@@ -87,7 +90,9 @@ const Header = ({ type }) => {
               Get rewarded for your travels - unlock instant savings of 10% or
               more with a free booking account
             </p>
-            <button className="headerButton">Sign in / Register</button>
+            {!user && (
+              <button className="headerButton">Sign in / Register</button>
+            )}
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerSearchIcon" />

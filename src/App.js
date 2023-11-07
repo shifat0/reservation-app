@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import HotelList from "./Pages/HotelList/HotelList";
 import Hotel from "./Pages/Hotel/Hotel";
+import Login from "./Pages/Login/Login";
 
 function App() {
   const routes = [
@@ -16,6 +17,10 @@ function App() {
     {
       path: "/hotels/:id",
       element: <Hotel />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
     },
   ];
   return (

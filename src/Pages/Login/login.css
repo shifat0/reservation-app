@@ -1,0 +1,28 @@
+.loginContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30vh;
+}
+
+.loginContainer > input {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 20px;
+  border: 2px solid #053b50;
+  border-radius: 10px;
+}
+
+.loginContainer > button {
+  all: unset;
+  background-color: #176b87;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.loginContainer > span {
+  color: lightcoral;
+}
