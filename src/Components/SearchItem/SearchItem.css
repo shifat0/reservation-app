@@ -70,7 +70,7 @@
   color: #555;
 }
 
-.siDetailsTag > button {
+.siDetailsTag > a > button {
   border: 1px solid #088395;
   padding: 10px;
   background-color: #088395;
@@ -81,7 +81,7 @@
   font-weight: 500;
 }
 
-.siDetailsTag > button:hover {
+.siDetailsTag > a > button:hover {
   background-color: white;
   border: 1px solid #088395;
   color: #088395;

@@ -6,13 +6,26 @@ import { useLocation } from "react-router-dom";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../Components/SearchItem/SearchItem";
+import useFetch from "../../hooks/useFetch";
 
 const HotelList = () => {
   const location = useLocation();
+  // receiveing states passed from Header Component
   const [destination, setDestination] = useState(location.state.destination);
   const [date, setDate] = useState(location.state.date);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(1000);
+
+  const { data, loading, reFetch } = useFetch(
+    `${process.env.REACT_APP_PROXY_URL}/hotels?city=${destination}&min=${min}&max=${max}`
+  );
+
+  const handleSearch = () => {
+    reFetch();
+  };
+
   return (
     <>
       <Navbar />
@@ -23,7 +36,11 @@ const HotelList = () => {
             <h1 className="hlsTitle">Search</h1>
             <div className="hlsItem">
               <label>Destination</label>
-              <input type="text" name="" placeholder={destination} />
+              <input
+                type="text"
+                onChange={(e) => setDestination(e.target.value)}
+                placeholder={destination}
+              />
             </div>
             <div className="hlsItem">
               <label>Date</label>
@@ -53,13 +70,23 @@ const HotelList = () => {
                   <span className="hlsOptionText">
                     Min Price <small>(per night)</small>
                   </span>
-                  <input type="number" name="" min={0} />
+                  <input
+                    type="number"
+                    placeholder={min}
+                    onChange={(e) => setMin(e.target.value)}
+                    min={0}
+                  />
                 </div>
                 <div className="hlsOptionItem">
                   <span className="hlsOptionText">
                     Max Price <small>(per night)</small>
                   </span>
-                  <input type="number" name="" min={0} />
+                  <input
+                    type="number"
+                    placeholder={max}
+                    onChange={(e) => setMax(e.target.value)}
+                    min={10}
+                  />
                 </div>
                 <div className="hlsOptionItem">
                   <span className="hlsOptionText">Adult</span>
@@ -90,16 +117,10 @@ const HotelList = () => {
                 </div>
               </div>
             </div>
-            <button>Search</button>
+            <button onClick={handleSearch}>Search</button>
           </div>
           <div className="hlResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+            <SearchItem hotels={data} loading={loading} />
           </div>
         </div>
       </div>
