@@ -12,18 +12,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { images } from "../../Assets/Images";
 import useFetch from "../../hooks/useFetch";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { SearchContext } from "../../Context/SearchContext";
+import { AuthContext } from "../../Context/AuthContext";
+import Booking from "../../Components/Booking/Booking";
 
 const Hotel = () => {
   const [openSlider, setOpenSLider] = useState(false);
   const [slider, setSlider] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+
   const { id } = useParams();
   const { data, loading } = useFetch(
     `${process.env.REACT_APP_PROXY_URL}/hotels/single/${id}`
   );
 
   const { dates, options } = useContext(SearchContext);
+  const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const dayDifference = (date1, date2) => {
     const timeDiff = Math.abs(date2.getTime() - date1.getTime());
@@ -45,6 +52,14 @@ const Hotel = () => {
       slidenumber = slider === 5 ? 0 : slider + 1;
     }
     setSlider(slidenumber);
+  };
+
+  const handleClick = () => {
+    if (user) {
+      setShowModal(true);
+    } else {
+      navigate("/");
+    }
   };
 
   return (
@@ -76,7 +91,9 @@ const Hotel = () => {
         )}
         <div className="hotelWrapper">
           <h1 style={{ fontSize: "26px" }}>{data.name}</h1>
-          <button className="hotelBookNow">Reserve or Book now</button>
+          <button onClick={handleClick} className="hotelBookNow">
+            Reserve or Book now
+          </button>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
             <span>{data.address}</span>
@@ -117,12 +134,13 @@ const Hotel = () => {
                 <bold>BDT {days * options.room * data.cheapestPrice}</bold> (
                 {days} nights)
               </span>
-              <button>Reserve for a book now</button>
+              <button onClick={handleClick}>Reserve for a book now</button>
             </div>
           </div>
         </div>
         <Footer />
       </div>
+      {showModal && <Booking setModal={setShowModal} hotelId={id} />}
     </>
   );
 };

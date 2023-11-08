@@ -1,0 +1,97 @@
+.booking {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.443);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookingContainer {
+  background-color: white;
+  padding: 30px;
+  position: relative;
+  font-size: 18px;
+}
+
+.bookingContainer > span {
+  color: #176b87;
+  font-style: oblique;
+}
+
+.modalClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: lightcoral;
+  font-size: 20px;
+}
+
+.room {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.roomInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.roomTitle {
+  font-weight: bolder;
+}
+
+.roomDesc {
+  font-style: italic;
+  color: gray;
+}
+
+.roomMax,
+.roomPrice {
+  font-size: 16px;
+}
+
+.roomPrice > span {
+  font-weight: bold;
+  color: gray;
+}
+
+.selectRooms {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 10px;
+}
+
+.roomNumbers {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.roomNumbers > input {
+  cursor: pointer;
+}
+
+.bookingContainer > button {
+  border: none;
+  background-color: #176b87;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 30px;
+  letter-spacing: 5px;
+}
