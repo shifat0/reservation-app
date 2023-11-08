@@ -131,8 +131,10 @@ const Hotel = () => {
                 excellent location score of 9.8
               </span>
               <span style={{ fontWeight: "600" }}>
-                <bold>BDT {days * options.room * data.cheapestPrice}</bold> (
-                {days} nights)
+                <span style={{ fontWeight: "bolder" }}>
+                  BDT {days * options.room * data.cheapestPrice}
+                </span>{" "}
+                ({days} nights)
               </span>
               <button onClick={handleClick}>Reserve for a book now</button>
             </div>

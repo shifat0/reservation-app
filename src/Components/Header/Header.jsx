@@ -98,6 +98,7 @@ const Header = ({ type }) => {
                 <FontAwesomeIcon icon={faBed} className="headerSearchIcon" />
                 <input
                   type="text"
+                  name="search"
                   placeholder="Where are you going?"
                   className="headerSearchInput"
                   onChange={(e) => setDestination(e.target.value)}
@@ -117,6 +118,7 @@ const Header = ({ type }) => {
                 </span>
                 {showCalendar && (
                   <DateRange
+                    id="calander"
                     editableDateInputs={true}
                     onChange={(item) => setDates([item.selection])}
                     moveRangeOnFirstSelection={false}

@@ -25,7 +25,7 @@ const HotelList = () => {
   const handleSearch = () => {
     reFetch();
   };
-  console.log(options);
+
   const handleOptions = (e, name) => {
     setOptions((prev) => {
       return { ...prev, [name]: +e.target.value };
@@ -41,18 +41,19 @@ const HotelList = () => {
           <div className="hlSearch">
             <h1 className="hlsTitle">Search</h1>
             <div className="hlsItem">
-              <label>Destination</label>
+              <label htmlFor="destination">Destination</label>
               <input
                 type="text"
+                id="destination"
                 onChange={(e) => setDestination(e.target.value)}
                 placeholder={destination}
               />
             </div>
             <div className="hlsItem">
-              <label>Date</label>
+              <label htmlFor="date">Date</label>
               <input
                 type="text"
-                name=""
+                id="date"
                 onClick={() => setOpenDate(!openDate)}
                 placeholder={`${format(
                   dates[0].startDate,
@@ -61,6 +62,7 @@ const HotelList = () => {
               />
               {openDate && (
                 <DateRange
+                  id="calander"
                   editableDateInputs={true}
                   onChange={(item) => setDates([item.selection])}
                   moveRangeOnFirstSelection={false}
@@ -70,7 +72,7 @@ const HotelList = () => {
               )}
             </div>
             <div className="hlsItem">
-              <label>Options</label>
+              <label htmlFor="options">Options</label>
               <div className="hlsOption">
                 <div className="hlsOptionItem">
                   <span className="hlsOptionText">
@@ -78,6 +80,7 @@ const HotelList = () => {
                   </span>
                   <input
                     type="number"
+                    id="options"
                     placeholder={min}
                     onChange={(e) => setMin(e.target.value)}
                     min={0}
@@ -89,6 +92,7 @@ const HotelList = () => {
                   </span>
                   <input
                     type="number"
+                    id="optionsMax"
                     placeholder={max}
                     onChange={(e) => setMax(e.target.value)}
                     min={10}
@@ -98,6 +102,7 @@ const HotelList = () => {
                   <span className="hlsOptionText">Adult</span>
                   <input
                     type="number"
+                    id="optionsAdult"
                     onChange={(e) => handleOptions(e, "adult")}
                     placeholder={options.adult}
                     min={1}
@@ -107,6 +112,7 @@ const HotelList = () => {
                   <span className="hlsOptionText">Children</span>
                   <input
                     type="number"
+                    id="optionsChildren"
                     onChange={(e) => handleOptions(e, "children")}
                     placeholder={options.children}
                     min={0}
@@ -116,6 +122,7 @@ const HotelList = () => {
                   <span className="hlsOptionText">Room</span>
                   <input
                     type="number"
+                    id="optionsRoom"
                     onChange={(e) => handleOptions(e, "room")}
                     placeholder={options.room}
                     min={1}
