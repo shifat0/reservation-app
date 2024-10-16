@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./Header.css";
 import { DateRange } from "react-date-range";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../Context/SearchContext";
@@ -36,6 +36,9 @@ const Header = ({ type }) => {
   const { dispatch } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
 
+  const calenderRef = useRef();
+  const optionsRef = useRef();
+
   const handleSearch = () => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     navigate("/hotels", {
@@ -51,6 +54,25 @@ const Header = ({ type }) => {
       };
     });
   };
+
+  const handleClickOutside = (ref, callback) => {
+    const handleClick = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        callback();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClick);
+    document.addEventListener("touchstart", handleClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("touchstart", handleClick);
+    };
+  };
+
+  handleClickOutside(calenderRef, () => setShowCalendar(false));
+  handleClickOutside(optionsRef, () => setShowOptions(false));
 
   return (
     <div className="header">
@@ -104,7 +126,7 @@ const Header = ({ type }) => {
                   onChange={(e) => setDestination(e.target.value)}
                 />
               </div>
-              <div className="headerSearchItem">
+              <div className="headerSearchItem" ref={calenderRef}>
                 <FontAwesomeIcon
                   icon={faCalendarDays}
                   className="headerSearchIcon"
@@ -137,7 +159,7 @@ const Header = ({ type }) => {
                   {`${options.adult} adults • ${options.children} children • ${options.room} room`}
                 </span>
                 {showOptions && (
-                  <div className="options">
+                  <div className="options" ref={optionsRef}>
                     <div className="optionItem">
                       <span className="optionText">Adult</span>
                       <div className="optionCounter">
